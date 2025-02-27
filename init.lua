@@ -709,7 +709,34 @@ require('lazy').setup({
         -- clangd = {},
         -- gopls = {},
         -- pyright = {},
-        rust_analyzer = {},
+        rust_analyzer = {
+          cargo = {
+            allFeatures = true,
+            loadOutDirsFromCheck = true,
+            runBuildScripts = true,
+          },
+          -- Add clippy lints for Rust.
+          checkOnSave = {
+            allFeatures = true,
+            command = 'clippy',
+            extraArgs = {
+              '--',
+              '--no-deps',
+              '-Dclippy::correctness',
+              '-Dclippy::complexity',
+              '-Wclippy::perf',
+              '-Wclippy::pedantic',
+            },
+          },
+          procMacro = {
+            enable = true,
+            ignored = {
+              ['async-trait'] = { 'async_trait' },
+              ['napi-derive'] = { 'napi' },
+              ['async-recursion'] = { 'async_recursion' },
+            },
+          },
+        },
         pylsp = {},
         ruff = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
