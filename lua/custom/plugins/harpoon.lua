@@ -43,7 +43,7 @@ return {
 
     for i = 1, 9 do
       vim.keymap.set('n', '<leader>h' .. tostring(i), function()
-        harpoon:list():select(1)
+        harpoon:list():select(i)
       end, { desc = '[H]arpoon open ' .. tostring(i) })
     end
 
