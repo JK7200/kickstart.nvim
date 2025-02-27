@@ -180,6 +180,26 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 -- or just use <C-\><C-n> to exit terminal mode
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
+-- Keybindings for non-annoying end of line semicolon/braces insertion
+vim.keymap.set('i', '<C-S-[>', function()
+  local lang_tbl = {
+    ['python'] = '<Esc>A:<Enter>',
+    ['rust'] = '<Esc>A {}<left><Enter><Esc>O',
+    ['default'] = '<Esc>A {}<left><Enter><Esc>O',
+  }
+
+  local choice = vim.bo.filetype
+
+  local res = lang_tbl[choice]
+  if res then
+    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(res, true, false, true), 'n', false)
+  else
+    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(lang_tbl['default'], true, false, true), 'n', false)
+  end
+end)
+
+vim.keymap.set('i', '<C-S-;>', '<Esc>A;<Enter>')
+
 -- TIP: Disable arrow keys in normal mode
 vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
 vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
