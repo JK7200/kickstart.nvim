@@ -710,6 +710,7 @@ require('lazy').setup({
         -- gopls = {},
         -- pyright = {},
         rust_analyzer = {
+          -- https://neovim.discourse.group/t/cant-figure-out-how-to-get-clippy-warnings-from-rust-analyzer/4578
           cargo = {
             allFeatures = true,
             loadOutDirsFromCheck = true,
