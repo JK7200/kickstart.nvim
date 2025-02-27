@@ -201,6 +201,7 @@ end)
 vim.keymap.set('i', '<C-S-;>', '<Esc>A;<Enter>')
 vim.keymap.set('i', '<C-S-.>', '<Esc>A -> ')
 vim.keymap.set('i', '<C-S-,>', '<Esc>A,<Enter>')
+vim.keymap.set('i', '<C-S-l>', '<Esc>A')
 
 -- TIP: Disable arrow keys in normal mode
 vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
