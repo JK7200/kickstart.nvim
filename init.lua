@@ -156,6 +156,10 @@ vim.opt.cursorline = true
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
 
+--
+-- vim.cmd 'filetype plugin on'
+vim.cmd 'syntax on'
+
 -- TAB setup
 vim.o.tabstop = 4 -- A TAB character looks like 4 spaces
 vim.o.expandtab = true -- Pressing the TAB key will insert spaces instead of a TAB character
@@ -165,7 +169,7 @@ vim.o.shiftwidth = 4 -- Number of spaces inserted when indenting
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
--- Clear highlights on search when pressing <Esc> in normal mode
+-- Clear highlights on sea, 'latex'rch when pressing <Esc> in normal mode
 --  See `:help hlsearch`
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
@@ -710,6 +714,11 @@ require('lazy').setup({
         -- clangd = {},
         -- gopls = {},
         -- pyright = {},
+        solidity_ls = {
+          root_dir = require('lspconfig').util.root_pattern('hardhat.config.*', '.git'),
+          filetypes = { 'solidity' },
+        },
+        ltex = {},
         rust_analyzer = {
           -- https://neovim.discourse.group/t/cant-figure-out-how-to-get-clippy-warnings-from-rust-analyzer/4578
           cargo = {
@@ -782,6 +791,9 @@ require('lazy').setup({
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format Lua code
+        'pylint',
+        'flake8',
+        'solhint',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
@@ -838,6 +850,9 @@ require('lazy').setup({
         lua = { 'stylua' },
         -- Conform can also run multiple formatters sequentially
         python = { 'ruff_organize_imports', 'ruff_format' },
+        latex = { 'latexindent', 'tex-fmt' },
+        tex = { 'latexindent', 'tex-fmt' },
+        solidity = { 'prettierd' },
         --
         -- You can use 'stop_after_first' to run the first available formatter from the list
         -- javascript = { "prettierd", "prettier", stop_after_first = true },
@@ -1044,9 +1059,9 @@ require('lazy').setup({
         -- Some languages depend on vim's regex highlighting system (such as Ruby) for indent rules.
         --  If you are experiencing weird indenting issues, add the language to
         --  the list of additional_vim_regex_highlighting and disabled languages for indent.
-        additional_vim_regex_highlighting = { 'ruby' },
+        additional_vim_regex_highlighting = { 'ruby', 'latex' },
       },
-      indent = { enable = true, disable = { 'ruby' } },
+      indent = { enable = true, disable = { 'ruby', 'latex' } },
     },
     -- There are additional nvim-treesitter modules that you can use to interact
     -- with nvim-treesitter. You should go explore a few and see what interests you:

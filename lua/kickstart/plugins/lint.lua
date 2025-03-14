@@ -28,6 +28,7 @@ return {
           --   terraform = { "tflint" },
           text = { 'vale' },
           python = { 'ruff', 'pylint', 'pflake8' },
+          solidity = { 'solhint' },
         }
       --
       -- You can disable the default linters by setting their filetypes to nil:
