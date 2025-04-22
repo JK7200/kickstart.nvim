@@ -719,6 +719,7 @@ require('lazy').setup({
           filetypes = { 'solidity' },
         },
         ltex = {},
+        harper_ls = {},
         rust_analyzer = {
           -- https://neovim.discourse.group/t/cant-figure-out-how-to-get-clippy-warnings-from-rust-analyzer/4578
           cargo = {
